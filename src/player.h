@@ -1,5 +1,6 @@
 #pragma once
 #include <raylib.h>
+#include <stdint.h>
 
 typedef uint32_t score_t;
 
