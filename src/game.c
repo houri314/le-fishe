@@ -4,7 +4,7 @@
 
 #include "control.h"
 
-static const float cSpeed = 4.0f;
+static const float cSpeed = PI/2;
 
 static void updatePlayerCamera(Camera3D* c) {
 	static float p;
@@ -19,8 +19,9 @@ static void updatePlayerCamera(Camera3D* c) {
 	else if (IsKeyDown(LEFT))
 		p += delta;
 
-	c->target.x = c->position.x + 6*sin(PI/2*p);
-	c->target.z = c->position.z + 6*cos(PI/2*p);
+	// camera rotation
+	c->target.x = c->position.x + 6*sin(cSpeed*p);
+	c->target.z = c->position.z + 6*cos(cSpeed*p);
 
 
 }
