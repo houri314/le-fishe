@@ -45,6 +45,7 @@ Config getGameConfig() {
 void initGame() {
 	if (conf.vsync) SetConfigFlags(FLAG_VSYNC_HINT);
 	if (conf.targetFPS>0) SetTargetFPS(conf.targetFPS);
+	ChangeDirectory(GetApplicationDirectory());
 	InitWindow(conf.ww, conf.wh, gameName);
 	InitAudioDevice();
 	SetMasterVolume(conf.volume);
