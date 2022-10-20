@@ -4,9 +4,9 @@
 typedef uint32_t score_t;
 
 typedef enum PlayerState {
-	IDLE,
-	FISHING,
-	REELING
+	STATE_IDLE,
+	STATE_FISHING,
+	STATE_REELING
 } PlayerState;
 
 typedef struct {
