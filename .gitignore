@@ -1,0 +1,12 @@
+.*
+!.gitignore
+*.o
+*.out
+*.dll
+*.so
+*.a
+*.exe
+
+*.tar*
+*.zip
+*.rar
