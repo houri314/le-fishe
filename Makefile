@@ -14,6 +14,7 @@ game: main.o
 
 main.o: splash.o misc.o
 	${CC} -c src/main.c ${CFLAGS} -o main.o
+.PHONY: splash.o
 splash.o:
 	${CC} -c src/splash.c ${CFLAGS} -o splash.o
 misc.o:

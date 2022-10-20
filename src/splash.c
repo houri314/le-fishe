@@ -6,9 +6,11 @@
 #define wh getGameConfig().wh
 
 static uint8_t splashState = 1;
-static Color splashBgCol = (Color){ 37, 23, 50, 255};
-static Color raylibTexCol = (Color){ 220, 220, 220, 0};
-static Color hourinTexCol = (Color){ 220, 220, 220, 0};
+static Color splashBgCol = (Color){ 147, 159, 228, 255};
+static Color raylibTexCol = (Color){ 62, 76, 67, 0};
+static Color hourinTexCol = (Color){ 67, 38, 92, 0};
+
+static const char* pLink = "https://github.com/houri314/le-fishe";
 
 void drawSplash() {
 	static int frameCounter = 0;
@@ -48,8 +50,8 @@ void drawSplash() {
 			wh/2,
 			25,
 			raylibTexCol);
-		DrawText("https://github.com/houri314/<projectname>",
-			(ww-MeasureText("https://github.com/houri314/<projectname>",25))/2,
+		DrawText(pLink,
+			(ww-MeasureText(pLink,25))/2,
 			wh/2+25,
 			25,
 			hourinTexCol);
@@ -70,14 +72,15 @@ void drawSplash() {
 			wh/2,
 			25,
 			raylibTexCol);
-		DrawText("https://github.com/houri314/<projectname>",
-			(ww-MeasureText("https://github.com/houri314/<projectname>",25))/2,
+		DrawText(pLink,
+			(ww-MeasureText(pLink,25))/2,
 			wh/2+25,
 			25,
 			hourinTexCol);
-		raylibTexCol.a -= GetFrameTime() * SPLASH_SPEED;
+		if (raylibTexCol.a > 10)
+			raylibTexCol.a -= GetFrameTime() * SPLASH_SPEED;
 		hourinTexCol.a -= GetFrameTime() * SECONDARY_SPEED;
-		if (raylibTexCol.a <= 10) // barely visible
+		if (hourinTexCol.a <= 10) // barely visible
 			splashState++;
 	}
 	
