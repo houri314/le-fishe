@@ -2,6 +2,29 @@
 #include "player.h"
 #include <raylib.h>
 
+#include "control.h"
+
+static const float cSpeed = 4.0f;
+
+static void updatePlayerCamera(Camera3D* c) {
+	static float p;
+	float delta = GetFrameTime();
+	UpdateCamera(c);
+	if (IsKeyDown(UP))
+		c->target.y += cSpeed * delta;
+	else if (IsKeyDown(DOWN))
+		c->target.y -= cSpeed * delta;
+	if (IsKeyDown(RIGHT))
+		p -= delta;
+	else if (IsKeyDown(LEFT))
+		p += delta;
+
+	c->target.x = c->position.x + 6*sin(PI/2*p);
+	c->target.z = c->position.z + 6*cos(PI/2*p);
+
+
+}
+
 void drawGame() {
 	BeginDrawing();
 	ClearBackground(WHITE);
@@ -19,5 +42,5 @@ void drawGame() {
 }
 
 void updateGame() {
-
+	updatePlayerCamera(&getPlayerPointer()->c);
 }

@@ -13,7 +13,7 @@ void initPlayer() {
 	p.c.up = (Vector3){ 0.0f, 1.0f, 0.0f };
 	p.c.fovy = 60.0f;
 	p.c.projection = CAMERA_PERSPECTIVE;
-	SetCameraMode(p.c, CAMERA_FIRST_PERSON);
+	SetCameraMode(p.c, CAMERA_CUSTOM);
 
 }
 

@@ -33,7 +33,7 @@ state_game:
 	PlayMusicStream(bgm);
 
 	while (!WindowShouldClose()) {
-		UpdateCamera(&getPlayerPointer()->c);
+		updateGame();
 		UpdateMusicStream(bgm);
 		drawGame();
 		updateGameTitle();
