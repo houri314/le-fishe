@@ -3,6 +3,8 @@
 
 #include "misc.h"
 #include "splash.h"
+#include "game.h"
+#include "player.h"
 
 int main() {
 	initGame();
@@ -22,7 +24,9 @@ state_drawing_splash:
 	}
 
 state_game: {
-
+	while (!WindowShouldClose()) {
+		
+	}
 }
 
 state_deinit:
