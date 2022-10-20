@@ -3,6 +3,7 @@
 #include <raylib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <raymath.h>
 
 typedef uint32_t worldtime_t;

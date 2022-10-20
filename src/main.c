@@ -6,8 +6,12 @@
 #include "game.h"
 #include "player.h"
 
+static const uint8_t minBGM = 0;
+static const uint8_t maxBGM = 1;
+
 int main() {
 	initGame();
+	Music bgm;
 
 state_drawing_splash:
 	while (!WindowShouldClose()) {
@@ -23,13 +27,19 @@ state_drawing_splash:
 		
 	}
 
-state_game: {
+state_game:
+	bgm = LoadMusicStream("res/bgm00.ogg");
+	PlayMusicStream(bgm);
+
 	while (!WindowShouldClose()) {
+		UpdateMusicStream(bgm);
+		drawGame();
+		updateGameTitle();
 		
 	}
-}
 
 state_deinit:
+	UnloadMusicStream(bgm);
 	CloseWindow();
 	CloseAudioDevice();
 	return 0;
