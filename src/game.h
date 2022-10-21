@@ -1,5 +1,6 @@
 #pragma once
 
+#include "music.h"
 #include <raylib.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +11,7 @@ typedef uint32_t worldtime_t;
 
 typedef struct {
 	worldtime_t time; // world time (measured in second)
+
 } World;
 
 World* getWorldPointer();

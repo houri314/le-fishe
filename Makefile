@@ -12,7 +12,7 @@ CFLAGS:=${LIBS} -pthread ${INCL} ${OPT}
 game: main.o
 	${CC} *.o ${CFLAGS} -o fishe.out
 
-main.o: splash.o misc.o game.o player.o
+main.o: splash.o misc.o game.o player.o music.o
 	${CC} -c src/main.c ${CFLAGS} -o main.o
 .PHONY: game.o
 splash.o:
@@ -23,6 +23,8 @@ game.o:
 	${CC} -c src/game.c ${CFLAGS} -o game.o
 player.o:
 	${CC} -c src/player.c ${CFLAGS} -o player.o
+music.o:
+	${CC} -c src/music.c ${CFLAGS} -o music.o
 
 archive-xz:
 	xz -z archive-${TODAY}.tar -f -v -k -${COMPLEVEL}
