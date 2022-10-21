@@ -7,22 +7,29 @@
 static const float cSpeed = PI/2;
 
 static void updatePlayerCamera(Camera3D* c) {
-	static float p;
+	static float p;  // camera horizontal rotation
+	static float py; // camera vertical rotation
+	static const float upLim = 7.5f; // limit to vertical camera rotation
+	static const float downLim = -2.0f;
 	float delta = GetFrameTime();
 	UpdateCamera(c);
 	if (IsKeyDown(UP))
-		c->target.y += cSpeed * delta;
-	else if (IsKeyDown(DOWN))
-		c->target.y -= cSpeed * delta;
+		if (c->target.y < upLim)
+			py += delta;
+	if (IsKeyDown(DOWN))
+		if (c->target.y > downLim)
+			py -= delta;
 	if (IsKeyDown(RIGHT))
 		p -= delta;
 	else if (IsKeyDown(LEFT))
 		p += delta;
 
 	// camera rotation
+	//  actually i don't have any particular reason to
+	//  use 6. i don't know, but it works.
 	c->target.x = c->position.x + 6*sin(cSpeed*p);
 	c->target.z = c->position.z + 6*cos(cSpeed*p);
-
+	c->target.y = c->position.y + 6*sin(cSpeed*py);
 
 }
 
