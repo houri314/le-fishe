@@ -30,9 +30,10 @@ state_drawing_splash:
 state_game:
 	bgm = LoadMusicStream("res/bgm00.ogg");
 	initPlayer();
-	PlayMusicStream(bgm);
 
 	while (!WindowShouldClose()) {
+		if (!IsMusicStreamPlaying(bgm))
+			PlayMusicStream(bgm);
 		updateGame();
 		UpdateMusicStream(bgm);
 		drawGame();
