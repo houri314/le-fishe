@@ -28,7 +28,7 @@ state_drawing_splash:
 	}
 
 state_game:
-	bgm = LoadMusicStream("res/snd/bgm00.ogg");
+	bgm = getMusicTrack(0);
 	initPlayer();
 	initWorld();
 
