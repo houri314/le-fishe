@@ -34,7 +34,7 @@ state_game:
 	while (!WindowShouldClose()) {
 		if (!IsMusicStreamPlaying(bgm))
 			PlayMusicStream(bgm);
-		updateGame();
+		updatePlayerCamera(&getPlayerPointer()->c);
 		UpdateMusicStream(bgm);
 		drawGame();
 		updateGameTitle();
