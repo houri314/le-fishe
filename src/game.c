@@ -41,11 +41,6 @@ void updatePlayerCamera(Camera3D* c) {
 }
 
 void drawGame() {
-	BeginDrawing();
-	if (!w.isNight)
-		ClearBackground(SKYBLUE);
-	else
-		ClearBackground(DARKBLUE);
 	Player* p = getPlayerPointer();
 	BeginMode3D(getPlayerCamera());
 		// i copied these lines from raylib example to
@@ -56,7 +51,6 @@ void drawGame() {
 	EndMode3D();
 
 	DrawText(TextFormat("%d", w.time), 0, 0, 20, BLACK);
-	EndDrawing();
 }
 
 void initWorld() {

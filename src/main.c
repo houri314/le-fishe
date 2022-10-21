@@ -38,8 +38,17 @@ state_game:
 		updatePlayerCamera(&getPlayerPointer()->c);
 		updateWorld();
 		UpdateMusicStream(bgm);
-		drawGame();
 		updateGameTitle();
+
+		BeginDrawing();
+
+		if (!getWorldPointer()->isNight)
+			ClearBackground(SKYBLUE);
+		else
+			ClearBackground(DARKBLUE);
+		drawGame();
+
+		EndDrawing();
 		
 	}
 
