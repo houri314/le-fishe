@@ -52,7 +52,7 @@ void initGame() {
 	InitAudioDevice();
 	SetMasterVolume(conf.volume);
 
-	Image icon = LoadImage("res/icon.png");
+	Image icon = LoadImage("res/img/icon.png");
 	SetWindowIcon(icon);
 	UnloadImage(icon);
 }
