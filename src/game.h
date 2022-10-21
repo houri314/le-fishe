@@ -11,11 +11,16 @@ typedef uint32_t worldtime_t;
 
 typedef struct {
 	worldtime_t time; // world time (measured in second)
-
+	
+	// will change this to an uint32_t flag if it gets bigger
+	bool isNight;
 } World;
 
+void initWorld();
+void updateWorld();
 World* getWorldPointer();
+World getWorld();
 worldtime_t getWorldTime();
 
 void drawGame();
-void updateGame();
+void updatePlayerCamera(Camera3D* c);

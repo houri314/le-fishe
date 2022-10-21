@@ -4,9 +4,14 @@
 
 #include "control.h"
 
+static World w = {
+	.time = 0,
+	.isNight = 0
+};
+
 static const float cSpeed = PI/2;
 
-static void updatePlayerCamera(Camera3D* c) {
+void updatePlayerCamera(Camera3D* c) {
 	static float p;  // camera horizontal rotation
 	static float py; // camera vertical rotation
 	static const float upLim = 7.5f; // limit to vertical camera rotation
@@ -49,6 +54,19 @@ void drawGame() {
 	EndDrawing();
 }
 
-void updateGame() {
-	updatePlayerCamera(&getPlayerPointer()->c);
+void initWorld() {
+	w.time = 0;
+	w.isNight = 0;
 }
+
+void updateWorld() {
+	static float t = 0;
+	t += GetFrameTime();
+	if (t >= 1) {
+		w.time++;
+		t = 0;
+	}
+}
+
+World* getWorldPointer() { return &w; }
+World getWorld() { return w; }
