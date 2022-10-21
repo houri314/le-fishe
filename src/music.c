@@ -6,6 +6,9 @@
 // flags for loading music depending on day-night time
 //  first element corresponds to res/snd/bgm00.ogg
 //  so on so on
+//
+//  however i wonder if i should use [track][attr] or keep
+//  [attr][track] ?
 static const bool musicAttr[][MAXTRACK+1] = {
 	{ 0, 1, 1 },  // is music played during night ?
 	{ 1, 1, 0 }   // is music played during day ?
