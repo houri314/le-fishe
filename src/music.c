@@ -14,6 +14,9 @@ static const bool musicAttr[][MAXTRACK+1] = {
 	{ 1, 1, 0 }   // is music played during day ?
 };
 
+// shouldn't play music at full volume
+static const float trackVol = 0.6f;
+
 bool getMusicAttr(music_t index, uint8_t attr) {
 	if (index>MAXTRACK)
 		TraceLog(LOG_WARNING,
@@ -30,8 +33,11 @@ Music getMusicTrack(music_t index) {
 	if (index>MAXTRACK)
 		TraceLog(LOG_WARNING,
 			TextFormat("%d>MAXTRACK(%d)\n", index, MAXTRACK));
-	return LoadMusicStream(
-		TextFormat("res/snd/bgm0%d.ogg", index)
-		);
-}
+	Music tmp = LoadMusicStream(
+			TextFormat("res/snd/bgm%02d.ogg", index)
+			);
+	SetMusicVolume(tmp, trackVol);
+	tmp.looping = false;
+	return tmp;
 
+}

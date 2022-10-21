@@ -32,12 +32,12 @@ state_game:
 	initPlayer();
 	initWorld();
 
+	PlayMusicStream(bgm);
 	while (!WindowShouldClose()) {
-		if (!IsMusicStreamPlaying(bgm))
-			PlayMusicStream(bgm);
 		updatePlayerCamera(&getPlayerPointer()->c);
 		updateWorld();
-		UpdateMusicStream(bgm);
+		if (IsMusicStreamPlaying(bgm))
+			UpdateMusicStream(bgm);
 		updateGameTitle();
 
 		BeginDrawing();
