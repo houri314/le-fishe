@@ -4,6 +4,8 @@
 
 #include "control.h"
 
+#define WORLDDAY 60
+
 static World w = {
 	.time = 0,
 	.isNight = 0
@@ -40,9 +42,11 @@ void updatePlayerCamera(Camera3D* c) {
 
 void drawGame() {
 	BeginDrawing();
-	ClearBackground(WHITE);
+	if (!w.isNight)
+		ClearBackground(SKYBLUE);
+	else
+		ClearBackground(DARKBLUE);
 	Player* p = getPlayerPointer();
-
 	BeginMode3D(getPlayerCamera());
 		// i copied these lines from raylib example to
 		// test the camera first
@@ -51,6 +55,7 @@ void drawGame() {
                 DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
 	EndMode3D();
 
+	DrawText(TextFormat("%d", w.time), 0, 0, 20, BLACK);
 	EndDrawing();
 }
 
@@ -65,6 +70,10 @@ void updateWorld() {
 	if (t >= 1) {
 		w.time++;
 		t = 0;
+	}
+	if (w.time >= WORLDDAY) {
+		w.time = 0;
+		w.isNight = !w.isNight;
 	}
 }
 
