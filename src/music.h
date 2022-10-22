@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define MAXTRACK 2
+#define MAXTRACK 5
 #define MINTRACK 0
 
 typedef uint8_t music_t; 
