@@ -50,10 +50,7 @@ state_game:
 
 		BeginDrawing();
 
-		if (!getWorldPointer()->isNight)
-			ClearBackground(SKYBLUE);
-		else
-			ClearBackground(DARKBLUE);
+		ClearBackground(getSkyColor());
 		drawGame();
 
 		EndDrawing();
