@@ -4,7 +4,7 @@
 
 #include "control.h"
 
-#define WORLDDAY 60
+#define WORLDDAY 160
 
 static World w = {
 	.time = 0,
@@ -50,7 +50,7 @@ void drawGame() {
                 DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
 	EndMode3D();
 
-	DrawText(TextFormat("%d", w.time), 0, 0, 20, BLACK);
+//	DrawText(TextFormat("%d", w.time), 0, 0, 20, BLACK);
 }
 
 void initWorld() {
