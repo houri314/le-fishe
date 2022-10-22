@@ -7,6 +7,7 @@
 #define WORLDDAY 240
 
 static World w = {
+	.sky = (Color){ 0, 0, 0, 255},
 	.time = 0,
 	.isNight = 0
 };
@@ -60,6 +61,7 @@ void initWorld() {
 
 void updateWorld() {
 	static float t = 0;
+	static Color d;
 	t += GetFrameTime();
 	if (t >= 1) {
 		w.time++;
@@ -70,8 +72,14 @@ void updateWorld() {
 		w.isNight = !w.isNight;
 	}
 
-	if (!w.isNight) w.sky = SKYBLUE;
-	else if (w.isNight) w.sky = DARKBLUE;
+	if (!w.isNight) d = SKYBLUE;
+	if (!w.isNight && w.time >= 3*WORLDDAY/4) d = ORANGE;
+	else if (w.isNight) d= DARKBLUE;
+
+	w.sky.r += GetFrameTime()*100 * (w.sky.r!=d.r) * (-(w.sky.r>d.r) + (w.sky.r<d.r));
+	w.sky.g += GetFrameTime()*100 * (w.sky.g!=d.g) * (-(w.sky.g>d.g) + (w.sky.g<d.g));
+	w.sky.b += GetFrameTime()*100 * (w.sky.b!=d.b) * (-(w.sky.b>d.b) + (w.sky.b<d.b));
+
 }
 
 World* getWorldPointer() { return &w; }
