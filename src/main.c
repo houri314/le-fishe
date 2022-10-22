@@ -61,7 +61,9 @@ state_game:
 	}
 
 state_deinit:
-	UnloadMusicStream(bgm);
+	// unload bgm if it has been loaded
+	if (bgm.frameCount != 0)
+		UnloadMusicStream(bgm);
 	CloseWindow();
 	CloseAudioDevice();
 	return 0;
