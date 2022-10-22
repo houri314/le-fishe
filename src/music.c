@@ -10,8 +10,8 @@
 //  however i wonder if i should use [track][attr] or keep
 //  [attr][track] ?
 static const bool musicAttr[][MAXTRACK+1] = {
-	{ 0, 1, 1, 1, 1, 1 },  // is music played during night ?
-	{ 1, 1, 0, 0, 1, 0 }   // is music played during day ?
+	{ 0, 1, 1, 1, 1, 1, 0 },  // is music played during night ?
+	{ 1, 1, 0, 0, 1, 0, 1 }   // is music played during day ?
 };
 
 // shouldn't play music at full volume
