@@ -20,6 +20,7 @@ static const float trackVol = 0.45f;
 // for fading
 static float volDelta = 0.02;
 static float currentMVol = 0;
+static bool fadeOut = false;
 
 bool getMusicAttr(music_t index, uint8_t attr) {
 	if (index>MAXTRACK)
@@ -43,14 +44,20 @@ Music getMusicTrack(music_t index) {
 	SetMusicVolume(tmp, 0);
 	tmp.looping = false;
 	currentMVol = 0; // reset volume on loading new music
+	fadeOut = false; // reset fading
 	return tmp;
 
 }
 
 void updateMusic(Music* m) {
-	
-	if (currentMVol < trackVol) {
+	if (currentMVol < trackVol && !fadeOut) {
 		currentMVol += volDelta * GetFrameTime();
+		SetMusicVolume(*m, currentMVol);
+	}
+	if (GetMusicTimePlayed(*m)/GetMusicTimeLength(*m)>=0.9 && !fadeOut)
+		fadeOut = true;
+	if (fadeOut && currentMVol>=0) {
+		currentMVol -= volDelta * GetFrameTime() * 2;
 		SetMusicVolume(*m, currentMVol);
 	}
 	UpdateMusicStream(*m);
