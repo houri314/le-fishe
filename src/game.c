@@ -4,7 +4,7 @@
 
 #include "control.h"
 
-#define WORLDDAY 160
+#define WORLDDAY 240
 
 static World w = {
 	.time = 0,
