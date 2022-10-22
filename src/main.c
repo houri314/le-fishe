@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <time.h>
 #include <raylib.h>
 
 #include "misc.h"
@@ -8,6 +9,8 @@
 
 static const uint8_t minBGM = 0;
 static const uint8_t maxBGM = 1;
+
+void loadMusic(Music* m);
 
 int main() {
 	initGame();
@@ -28,7 +31,8 @@ state_drawing_splash:
 	}
 
 state_game:
-	bgm = getMusicTrack(0);
+	loadMusic(&bgm);
+	SetRandomSeed(time(NULL));
 	initPlayer();
 	initWorld();
 
@@ -38,6 +42,10 @@ state_game:
 		updateWorld();
 		if (IsMusicStreamPlaying(bgm))
 			UpdateMusicStream(bgm);
+		else {
+			loadMusic(&bgm);
+			PlayMusicStream(bgm);
+		}
 		updateGameTitle();
 
 		BeginDrawing();
@@ -57,4 +65,22 @@ state_deinit:
 	CloseWindow();
 	CloseAudioDevice();
 	return 0;
+}
+
+void loadMusic(Music* m) {
+	int i = GetRandomValue(MINTRACK, MAXTRACK);
+	World w = getWorld();
+
+	// load music based on attribute and day time
+	//  this way of doing the task is clunky and probably 
+	//  a terrible way. i feel that it will break into wet
+	//  spaghetti when i decide to expand the world.
+	if (w.isNight)
+		while (!getMusicAttr(i, 0))
+			i = GetRandomValue(MINTRACK, MAXTRACK);
+	else if (!w.isNight)
+		while (!getMusicAttr(i, 1))
+			i = GetRandomValue(MINTRACK, MAXTRACK);
+
+	*m = getMusicTrack(i);
 }
