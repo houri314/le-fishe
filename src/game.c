@@ -69,7 +69,12 @@ void updateWorld() {
 		w.time = 0;
 		w.isNight = !w.isNight;
 	}
+
+	if (!w.isNight) w.sky = SKYBLUE;
+	else if (w.isNight) w.sky = DARKBLUE;
 }
 
 World* getWorldPointer() { return &w; }
 World getWorld() { return w; }
+Color getSkyColor() { return w.sky; }
+worldtime_t getWorldTime() { return w.time; }
