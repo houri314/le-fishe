@@ -19,4 +19,5 @@ enum {
 
 
 bool getMusicAttr(music_t index, uint8_t attr);
+void updateMusic(Music* m);
 Music getMusicTrack(music_t index);

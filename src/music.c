@@ -17,6 +17,10 @@ static const bool musicAttr[][MAXTRACK+1] = {
 // shouldn't play music at full volume
 static const float trackVol = 0.6f;
 
+// for fading
+static float volDelta = 0.005;
+static float currentMVol = 0;
+
 bool getMusicAttr(music_t index, uint8_t attr) {
 	if (index>MAXTRACK)
 		TraceLog(LOG_WARNING,
@@ -36,8 +40,18 @@ Music getMusicTrack(music_t index) {
 	Music tmp = LoadMusicStream(
 			TextFormat("res/snd/bgm%02d.ogg", index)
 			);
-	SetMusicVolume(tmp, trackVol);
+	SetMusicVolume(tmp, 0);
 	tmp.looping = false;
+	currentMVol = 0; // reset volume on loading new music
 	return tmp;
 
+}
+
+void updateMusic(Music* m) {
+	
+	if (currentMVol < trackVol) {
+		currentMVol += volDelta * GetFrameTime();
+		SetMusicVolume(*m, currentMVol);
+	}
+	UpdateMusicStream(*m);
 }

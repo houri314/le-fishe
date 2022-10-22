@@ -41,7 +41,7 @@ state_game:
 		updatePlayerCamera(&getPlayerPointer()->c);
 		updateWorld();
 		if (IsMusicStreamPlaying(bgm))
-			UpdateMusicStream(bgm);
+			updateMusic(&bgm);
 		else {
 			loadMusic(&bgm);
 			PlayMusicStream(bgm);
