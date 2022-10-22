@@ -15,10 +15,10 @@ static const bool musicAttr[][MAXTRACK+1] = {
 };
 
 // shouldn't play music at full volume
-static const float trackVol = 0.6f;
+static const float trackVol = 0.45f;
 
 // for fading
-static float volDelta = 0.005;
+static float volDelta = 0.02;
 static float currentMVol = 0;
 
 bool getMusicAttr(music_t index, uint8_t attr) {
