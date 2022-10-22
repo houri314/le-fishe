@@ -35,7 +35,7 @@ bool getMusicAttr(music_t index, uint8_t attr) {
 
 Music getMusicTrack(music_t index) {
 	if (index>MAXTRACK)
-		TraceLog(LOG_WARNING,
+		TraceLog(LOG_FATAL,
 			TextFormat("%d>MAXTRACK(%d)\n", index, MAXTRACK));
 	Music tmp = LoadMusicStream(
 			TextFormat("res/snd/bgm%02d.ogg", index)
