@@ -1,18 +1,20 @@
-CC:=gcc
-LIBS:=-lraylib
-INCL:=-I./external/
-
 OPT?=0
 COMPLEVEL?=6
+RAYLIBNAME?=libraylib
+RAYLIBEXT?=so
 TODAY:=$(shell date --iso-8601)
+
+CC:=gcc
+LIBS:=./lib/${RAYLIBNAME}.${RAYLIBEXT}
+INCL:=-I./external/
 
 DEBUG?=DISABLED
 
-CFLAGS:=${LIBS} -pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG}
+CFLAGS:=-pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG}
 
 .PHONY: main.o game
 game: main.o
-	${CC} *.o ${CFLAGS} -o fishe.out
+	${CC} *.o ${LIBS} ${CFLAGS} -o fishe.out
 
 main.o: splash.o misc.o game.o player.o music.o
 	${CC} -c src/main.c ${CFLAGS} -o main.o
