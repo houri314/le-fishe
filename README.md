@@ -21,6 +21,7 @@ Then you create a lib/ folder then put the raylib libraries in there.
 
 ### Extras
 Here are some `make` options you might find useful:
+- APPEXT (default `out`): file extension of application. Change to `exe` on Windows.
 - OPT (default 0): value can vary depend on your C compiler (0, 1, 2, 3, fast, ...). Optimization of program.
 - DEBUG (default `DISABLED`): use `ENABLED` to enable program verbose outputs.
 - RAYLIBEXT (default `so`): raylib library file extension name. Change to `a` or `dll` or whatever
