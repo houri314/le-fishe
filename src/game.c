@@ -4,7 +4,16 @@
 
 #include "control.h"
 
+#if defined(DEBUG_ENABLED)
+#include "misc.h"
+#include "music.h"
+#endif
+
+#if defined(DEBUG_ENABLED)
+#define WORLDDAY 10
+#else
 #define WORLDDAY 240
+#endif
 
 static World w = {
 	.sky = (Color){ 0, 0, 0, 255},
@@ -51,7 +60,14 @@ void drawGame() {
                 DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
 	EndMode3D();
 
-//	DrawText(TextFormat("%d", w.time), 0, 0, 20, BLACK);
+#if defined(DEBUG_ENABLED)
+	DrawText(TextFormat("T:%d", w.time), 0, 0, 20, BLACK);
+	DrawText(TextFormat("C_TARGET:%g %g", getPlayerCamera().target.x,
+				getPlayerCamera().target.z),
+		0, 20, 20, BLACK);
+	DrawText(TextFormat("SKY:%d %d %d", w.sky.r, w.sky.b, w.sky.g), 0,
+		getGameConfig().wh-20 ,20, BLACK);
+#endif
 }
 
 void initWorld() {
@@ -70,6 +86,10 @@ void updateWorld() {
 	if (w.time >= WORLDDAY) {
 		w.time = 0;
 		w.isNight = !w.isNight;
+#if defined(DEBUG_ENABLED)
+		if (w.isNight) TraceLog(LOG_INFO, "Time is now night");
+		else TraceLog(LOG_INFO, "Time is now day");
+#endif
 	}
 
 	if (!w.isNight) d = SKYBLUE;

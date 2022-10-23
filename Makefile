@@ -6,7 +6,9 @@ OPT?=-O0
 COMPLEVEL?=6
 TODAY:=$(shell date --iso-8601)
 
-CFLAGS:=${LIBS} -pthread ${INCL} ${OPT}
+DEBUG?=DISABLED
+
+CFLAGS:=${LIBS} -pthread ${INCL} ${OPT} -DDEBUG_${DEBUG}
 
 .PHONY: main.o game
 game: main.o

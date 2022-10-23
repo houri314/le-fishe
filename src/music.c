@@ -45,6 +45,9 @@ Music getMusicTrack(music_t index) {
 	tmp.looping = false;
 	currentMVol = 0; // reset volume on loading new music
 	fadeOut = false; // reset fading
+#if defined(DEBUG_ENABLED)
+	TraceLog(LOG_INFO, "Loaded track %02d", index);
+#endif
 	return tmp;
 
 }
