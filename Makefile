@@ -2,13 +2,13 @@ CC:=gcc
 LIBS:=-lraylib
 INCL:=-I./external/
 
-OPT?=-O0
+OPT?=0
 COMPLEVEL?=6
 TODAY:=$(shell date --iso-8601)
 
 DEBUG?=DISABLED
 
-CFLAGS:=${LIBS} -pthread ${INCL} ${OPT} -DDEBUG_${DEBUG}
+CFLAGS:=${LIBS} -pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG}
 
 .PHONY: main.o game
 game: main.o

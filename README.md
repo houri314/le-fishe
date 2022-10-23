@@ -24,4 +24,3 @@ Here are some `make` options you might find useful:
 - OPT (default 0): value can vary depend on your C compiler (0, 1, 2, 3, fast, ...). Optimization of program.
 - DEBUG (default `DISABLED`): use `ENABLED` to enable program verbose outputs.
 - COMPLEVEL (default 6): change compression level of `make archive-xz`.
-- LIBTYPE (default `shared`): **use lowercase only**. Change to `static` to do static linking with raylib, or `shared` to link with libraylib.so.
