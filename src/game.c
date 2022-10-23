@@ -47,7 +47,17 @@ void updatePlayerCamera(Camera3D* c) {
 
 #if defined (MOUSE_ENABLED)
 	p -= GetMouseDelta().x * delta * MOUSE_SPEED;
-	py -= GetMouseDelta().y * delta * MOUSE_SPEED * (-(REVERT_MOUSE) + !(REVERT_MOUSE));
+
+	// previous camera implementation doesn't work well with mouse
+	//  as camera will behave weird (unwanted, but expected).
+	//  i have to keep camera target Y between upLim and downLiim
+	//
+	//  here is my 1st solution
+	py += (c->target.y < upLim && c->target.y > downLim) *
+		GetMouseDelta().y * delta * MOUSE_SPEED * ((REVERT_MOUSE) -
+				!(REVERT_MOUSE)) + (MOUSE_ENABLED * delta *
+				(-(c->target.y > upLim) + (c->target.y <
+							   downLim)));
 	SetMousePosition(getGameConfig().ww/2, getGameConfig().wh/2);
 #endif
 
