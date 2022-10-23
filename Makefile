@@ -1,16 +1,14 @@
+CC:=gcc
+LIBS:=-lraylib
+INCL:=-I./external/
+
 OPT?=-O0
 COMPLEVEL?=6
-LIBTYPE?=shared
 TODAY:=$(shell date --iso-8601)
-
-CC:=gcc
-LIBS:=-${LIBTYPE} -lraylib
-LIBSDIR:=-L./lib/
-INCL:=-I./external/
 
 DEBUG?=DISABLED
 
-CFLAGS:=${LIBSDIR} ${LIBS} -pthread ${INCL} ${OPT} -DDEBUG_${DEBUG}
+CFLAGS:=${LIBS} -pthread ${INCL} ${OPT} -DDEBUG_${DEBUG}
 
 .PHONY: main.o game
 game: main.o
