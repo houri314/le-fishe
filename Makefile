@@ -1,4 +1,4 @@
-OPT?=0
+OPT?=-O0
 COMPLEVEL?=6
 LIBTYPE?=shared
 TODAY:=$(shell date --iso-8601)
@@ -10,7 +10,7 @@ INCL:=-I./external/
 
 DEBUG?=DISABLED
 
-CFLAGS:=${LIBSDIR} ${LIBS} -pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG}
+CFLAGS:=${LIBSDIR} ${LIBS} -pthread ${INCL} ${OPT} -DDEBUG_${DEBUG}
 
 .PHONY: main.o game
 game: main.o
