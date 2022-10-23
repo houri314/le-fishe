@@ -8,7 +8,7 @@ TODAY:=$(shell date --iso-8601)
 
 DEBUG?=DISABLED
 
-CFLAGS:=${LIBS} -pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG}
+CFLAGS:=${LIBS} -pthread ${INCL} -O${OPT} -DDEBUG_${DEBUG} -DMOUSE_ENABLED
 
 .PHONY: main.o game
 game: main.o

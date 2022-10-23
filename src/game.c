@@ -9,6 +9,10 @@
 #include "music.h"
 #endif
 
+#if defined(MOUSE_ENABLED)
+#include "misc.h"
+#endif
+
 #if defined(DEBUG_ENABLED)
 #define WORLDDAY 10
 #else
@@ -41,6 +45,12 @@ void updatePlayerCamera(Camera3D* c) {
 	else if (IsKeyDown(LEFT))
 		p += delta;
 
+#if defined (MOUSE_ENABLED)
+	p -= GetMouseDelta().x * delta * MOUSE_SPEED;
+	py -= GetMouseDelta().y * delta * MOUSE_SPEED * (-(REVERT_MOUSE) + !(REVERT_MOUSE));
+	SetMousePosition(getGameConfig().ww/2, getGameConfig().wh/2);
+#endif
+
 	// camera rotation
 	//  actually i don't have any particular reason to
 	//  use 6. i don't know, but it works.
@@ -62,7 +72,8 @@ void drawGame() {
 
 #if defined(DEBUG_ENABLED)
 	DrawText(TextFormat("T:%d", w.time), 0, 0, 20, BLACK);
-	DrawText(TextFormat("C_TARGET:%g %g", getPlayerCamera().target.x,
+	DrawText(TextFormat("C_TARGET:%g %g %g", getPlayerCamera().target.x,
+				getPlayerCamera().target.y,
 				getPlayerCamera().target.z),
 		0, 20, 20, BLACK);
 	DrawText(TextFormat("SKY:%d %d %d", w.sky.r, w.sky.b, w.sky.g), 0,

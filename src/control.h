@@ -8,3 +8,8 @@
 
 #define FISH KEY_SPACE
 #define PAUSE KEY_ESC
+
+#if defined(MOUSE_ENABLED)
+#define MOUSE_SPEED 0.09
+#define REVERT_MOUSE false
+#endif
