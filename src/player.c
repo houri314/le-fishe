@@ -8,8 +8,7 @@ void initPlayer() {
 	p.score = 0;
 
 	// init camera
-	p.c.position = (Vector3){ 4.0f, 2.0f, 4.0f };
-	p.c.target = (Vector3){ 0.0f, 1.8f, 0.0f };
+	p.c.position = (Vector3){ 0, 2, 0 };
 	p.c.up = (Vector3){ 0.0f, 1.0f, 0.0f };
 	p.c.fovy = 60.0f;
 	p.c.projection = CAMERA_PERSPECTIVE;

@@ -15,12 +15,8 @@
 #define WORLDDAY 240
 #endif
 
-static World w = {
-	.sky = (Color){ 0, 0, 0, 255},
-	.time = 0,
-	.isNight = 0
-};
-
+static World w;
+static Model terrain;
 static const float cSpeed = PI/2;
 
 void updatePlayerCamera(Camera3D* c) {
@@ -53,11 +49,10 @@ void updatePlayerCamera(Camera3D* c) {
 void drawGame() {
 	Player* p = getPlayerPointer();
 	BeginMode3D(getPlayerCamera());
-		// i copied these lines from raylib example to
-		// test the camera first
-                DrawCube((Vector3){ -16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, BLUE);     // Draw a blue wall
-                DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);      // Draw a green wall
-                DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
+		DrawModel(terrain,
+			(Vector3){0, 1.5, -10},
+			1.0f,
+			WHITE);
 	EndMode3D();
 
 #if defined(DEBUG_ENABLED)
@@ -73,6 +68,9 @@ void drawGame() {
 void initWorld() {
 	w.time = 0;
 	w.isNight = 0;
+	w.sky = (Color){0, 0, 0, 255};
+
+	terrain = LoadModel("res/model/terrain.obj");
 }
 
 void updateWorld() {
