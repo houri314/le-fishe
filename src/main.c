@@ -31,20 +31,24 @@ state_drawing_splash:
 	}
 
 state_game:
-	loadMusic(&bgm);
 	SetRandomSeed(time(NULL));
 	initPlayer();
 	initWorld();
 
-	PlayMusicStream(bgm);
+	float mTime = GetRandomValue(5,25);
 	while (!WindowShouldClose()) {
 		updatePlayerCamera(&getPlayerPointer()->c);
 		updateWorld();
 		if (IsMusicStreamPlaying(bgm))
 			updateMusic(&bgm);
 		else {
-			loadMusic(&bgm);
-			PlayMusicStream(bgm);
+			if (mTime <= 0) {
+				loadMusic(&bgm);
+				PlayMusicStream(bgm);
+				mTime = GetRandomValue(20, 120);
+			}
+			else
+				mTime -= GetFrameTime();
 		}
 		updateGameTitle();
 
@@ -53,8 +57,15 @@ state_game:
 		ClearBackground(getSkyColor());
 		drawGame();
 
+#if defined(DEBUG_ENABLED)
+#define mTimeMsg TextFormat("%g", mTime)
+		DrawText(mTimeMsg,
+			getGameConfig().ww-MeasureText(mTimeMsg,30),
+			getGameConfig().wh-30,
+			30,RED);
+#endif
+
 		EndDrawing();
-		
 	}
 
 state_deinit:
